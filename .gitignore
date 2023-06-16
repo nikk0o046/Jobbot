@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 env-jobbot/
+*.pyc
+__pycache__/
 
 
