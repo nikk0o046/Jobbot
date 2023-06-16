@@ -19,7 +19,7 @@ function App() {
       <h1>Job Swipe App</h1>
       {jobSummaries.length > 0 ? (
         <div>
-          <p>{jobs[0]}</p>
+          <p>{jobSummaries[0]}</p>
           <button onClick={handleButtonClick}>Not Interested</button>
           <button onClick={handleButtonClick}>Interested</button>
         </div>
