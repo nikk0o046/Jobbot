@@ -25,5 +25,6 @@ dist-ssr
 env-jobbot/
 *.pyc
 __pycache__/
+secret_keys.py
 
 
