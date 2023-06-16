@@ -14,7 +14,7 @@ def load_data():
 
     # Create embeddings and add texts to the Pinecone index
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_APIKEY)
-    Pinecone.from_texts([job_listing.page_content for job_listing in job_data], embeddings, index_name=index_name)
+    Pinecone.from_texts(job_data, embeddings, index_name=index_name)
 
 # Load the data
 load_data()
