@@ -10,7 +10,7 @@ function App() {
   // Function to handle the 'Not Interested' and 'Interested' button clicks
   // This simply removes the current job summary from the list
   const handleButtonClick = () => {
-    setJobs(jobSummaries.slice(1));
+    setJobSummaries(jobSummaries.slice(1));
   };
 
   // Render the current job summary and the buttons
