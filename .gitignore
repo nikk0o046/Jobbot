@@ -26,5 +26,7 @@ env-jobbot/
 *.pyc
 __pycache__/
 secret_keys.py
+my_lambda_function/
+
 
 

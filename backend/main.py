@@ -3,7 +3,7 @@ from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from secret_keys import OPENAI_APIKEY, pinecone_apikey, pinecone_environment
 
-test_string = "I have a master's degree in Finance and four years of relevant experience. I am looking for senior level job."
+test_string = "I am soon to be graduate in information management. I have also worked two year as a data engineer."
 
 # Initialize Pinecone
 init(
@@ -28,5 +28,7 @@ if query:
     for doc in docs:
         sorted_job_list.append(doc.page_content)
 
-    print(sorted_job_list)
-
+    print("NEW QUERY!!!!!!!!!!!!!!!!!!!!!")
+    for item in sorted_job_list:
+        print(item, '\n')
+    print("---------------------------------")
