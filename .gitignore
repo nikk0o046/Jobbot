@@ -28,6 +28,8 @@ __pycache__/
 secret_keys.py
 my_lambda_function/
 env-jobbot-310/
+lib/
+env/
 
 
 
