@@ -1,3 +1,14 @@
+:root {
+  --primary-color: #646cff;
+  --secondary-color: #888;
+  --font-family: 'Arial', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--secondary-color);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -12,7 +23,7 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--primary-color)aa);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -35,8 +46,18 @@
 
 .card {
   padding: 2em;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--secondary-color);
+}
+
+textarea {
+  width: 90%; 
+  height: 150px;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: var(--font-family);
 }

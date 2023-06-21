@@ -1,33 +1,32 @@
-import { useState } from 'react';
-import './App.css';
-import axios from 'axios';
+import { useState } from 'react'
+import './App.css'
 
 function App() {
-  // We use the useState hook to manage the list of job summaries
   const [jobSummaries, setJobSummaries] = useState([]);
-  const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [userHasSubmitted, setUserHasSubmitted] = useState(false);
 
-  // Function to handle the 'Not Interested' and 'Interested' button clicks
-  // This simply removes the current job summary from the list
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setUserHasSubmitted(true);
+    const inputString = event.target.elements.inputString.value;
+    const response = await fetch('https://YOUR_BACKEND_FUNCTION_URL', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ inputString: inputString }),
+    });
+    const data = await response.json();
+    setJobSummaries(data);
+    setIsLoading(false);
+  };
+
   const handleButtonClick = () => {
     setJobSummaries(jobSummaries.slice(1));
   };
 
-  // Function to handle user input and send to the backend
-  const handleUserInput = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    const response = await axios.post('https://us-central1-grand-eye-390516.cloudfunctions.net/function-cors-test', {
-      input_string: userInput
-    });
-
-    setJobSummaries(response.data);
-    setIsLoading(false);
-  };
-
-  // Render the current job summary and the buttons
   return (
     <div>
       <h1>Job Swipe App</h1>
@@ -39,14 +38,16 @@ function App() {
           <button onClick={handleButtonClick}>Not Interested</button>
           <button onClick={handleButtonClick}>Interested</button>
         </div>
+      ) : userHasSubmitted ? (
+        <p>No more jobs available!</p>
       ) : (
-        <div>
-          <p>Describe your background and the job you're looking for:</p>
-          <form onSubmit={handleUserInput}>
-            <input value={userInput} onChange={e => setUserInput(e.target.value)} required />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Describe your background and the job you're looking for:
+            <textarea id="inputString" name="inputString" />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
       )}
     </div>
   );
