@@ -11,7 +11,7 @@ function App() {
     setIsLoading(true);
     setUserHasSubmitted(true);
     const inputString = event.target.elements.inputString.value;
-    const response = await fetch('https://YOUR_BACKEND_FUNCTION_URL', {
+    const response = await fetch('https://us-central1-grand-eye-390516.cloudfunctions.net/function-cors-test', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
