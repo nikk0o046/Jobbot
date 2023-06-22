@@ -16,7 +16,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ inputString: inputString }),
+      body: JSON.stringify({ input_string: inputString }),
     });
     const data = await response.json();
     setJobSummaries(data);
