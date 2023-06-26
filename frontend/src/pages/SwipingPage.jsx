@@ -1,28 +1,42 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AppContext } from '../AppProvider'; // Import the AppContext
+import { Box, IconButton, Typography } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import CloseIcon from '@mui/icons-material/Close';
+import StarIcon from '@mui/icons-material/Star';
 
 function SwipingPage() {
-  const initialJobSummaries = ['Job 1', 'Job 2', 'Job 3']; // Predefined list of jobs
-  const [jobSummaries, setJobSummaries] = useState(initialJobSummaries);
+  const { jobSummaries, setJobSummaries } = useContext(AppContext); // Use the context
 
   const handleButtonClick = () => {
     setJobSummaries(jobSummaries.slice(1));
   };
 
   return (
-    <div>
-      <h1>Job Swipe Page</h1>
-      {jobSummaries.length > 0 ? (
-        <div>
-          <p>{jobSummaries[0]}</p>
-          <button onClick={handleButtonClick}>Not Interested</button>
-          <button onClick={handleButtonClick}>Interested</button>
-        </div>
+    <Box sx={{ m: 2 }}> {/* Added some margin */}
+      <Typography variant="h4">Job Swipe Page</Typography>
+      {jobSummaries && jobSummaries.length > 0 ? ( // Check if jobSummaries exist and are not empty
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Typography variant="body1" sx={{ my: 2 }}>
+            {jobSummaries[0]} {/* Show the first job in the list */}
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
+            <IconButton color="error" onClick={handleButtonClick}>
+              <CloseIcon fontSize="large" />
+            </IconButton>
+            <IconButton color="primary" onClick={handleButtonClick}>
+              <StarIcon />
+            </IconButton>
+            <IconButton color="success" onClick={handleButtonClick}>
+              <FavoriteIcon fontSize="large" />
+            </IconButton>
+          </Box>
+        </Box>
       ) : (
-        <p>No more jobs available!</p>
+        <Typography>You have to complete your profile before swiping!</Typography>
       )}
-    </div>
+    </Box>
   );
 }
 
 export default SwipingPage;
-
