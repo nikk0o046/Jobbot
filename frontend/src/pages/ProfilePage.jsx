@@ -3,14 +3,13 @@ import { AppContext } from "../AppProvider";
 import { Container, TextField, Button, Typography } from "@mui/material";
 
 const ProfilePage = () => {
-  const { jobSummaries, setJobSummaries } = useContext(AppContext);
+  const { jobSummaries, setJobSummaries, setUserHasSubmitted } = useContext(AppContext); // Added setUserHasSubmitted
   const [isLoading, setIsLoading] = useState(false);
-  const [userHasSubmitted, setUserHasSubmitted] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    setUserHasSubmitted(true);
+    setUserHasSubmitted(true); // Set userHasSubmitted to true on submit
     const inputString = event.target.elements.inputString.value;
     const response = await fetch('https://us-central1-grand-eye-390516.cloudfunctions.net/function-jobbot', {
       method: 'POST',
@@ -28,7 +27,7 @@ const ProfilePage = () => {
     <Container>
       {isLoading ? (
         <Typography>Analysing...</Typography>
-      ) : userHasSubmitted && jobSummaries?.length > 0 ? (
+      ) : jobSummaries?.length > 0 ? (
         <Typography>Analysis complete. Happy swiping!</Typography>
       ) : (
         <form onSubmit={handleSubmit}>
