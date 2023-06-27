@@ -9,7 +9,7 @@ import AppProvider from './AppProvider';
 function App() {
     return (
       <AppProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/Jobbot">
           <Routes>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/swiping" element={<SwipingPage />} />
