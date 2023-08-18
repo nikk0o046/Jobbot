@@ -10,7 +10,7 @@ def load_data():
         api_key=pinecone_apikey,
         environment=pinecone_environment
     )
-    index_name = "jobbotindex"
+    index_name = "jobbotindex-index"
 
     # Create embeddings and add texts to the Pinecone index
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_APIKEY)
