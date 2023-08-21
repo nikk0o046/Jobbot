@@ -10,7 +10,7 @@ body {
 }
 
 #root {
-  max-width: 1280px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -60,4 +60,9 @@ textarea {
   border-radius: 8px;
   padding: 1rem;
   font-family: var(--font-family);
+  color: var(--secondary-color);
+}
+
+.css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input {
+  color: var(--secondary-color) !important; 
 }
