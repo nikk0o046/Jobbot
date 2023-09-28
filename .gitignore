@@ -31,6 +31,8 @@ env-jobbot-310/
 lib/
 env/
 tunnukset.txt
+backend/.env
+
 
 
 
