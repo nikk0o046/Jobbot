@@ -1,7 +1,6 @@
 def process_string(request):
     from flask import jsonify
     import os
-    import json
     from pinecone import init
     from langchain.vectorstores import Pinecone
     from langchain.embeddings.openai import OpenAIEmbeddings

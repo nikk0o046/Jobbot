@@ -1,5 +1,10 @@
 import requests
-from secret_keys import *
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+finland_client_id = os.environ['finland_client_id']
+finland_client_secret = os.environ['finland_client_secret']
 
 token_url = 'https://tedigib2c.b2clogin.com/tedigib2c.onmicrosoft.com/B2C_1A_SIGNIN/oauth2/v2.0/token'
 api_url = 'https://integraatiot.tyomarkkinatori.fi/jobpostingprovider/v1/tyopaikat?sivu=0&maara=100'
