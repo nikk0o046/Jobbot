@@ -3,7 +3,7 @@ import { AppContext } from "../AppProvider";
 import { Container, TextField, Button, Typography } from "@mui/material";
 
 const ProfilePage = () => {
-  const { jobSummaries, setJobSummaries, setUserHasSubmitted } = useContext(AppContext); // Added setUserHasSubmitted
+  const { jobSummaries, setJobSummaries, setUserHasSubmitted } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -11,14 +11,14 @@ const ProfilePage = () => {
     setIsLoading(true);
     setUserHasSubmitted(true); // Set userHasSubmitted to true on submit
     const inputString = event.target.elements.inputString.value;
-    const response = await fetch('https://us-central1-grand-eye-390516.cloudfunctions.net/function-jobbot', {
+    const response = await fetch('http://localhost:5000/function-jobbot', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ input_string: inputString }),
     });
-    const data = await response.json();
+    const data = await response.json(); // It expects a jsonified list of job summaries
     setJobSummaries(data);
     setIsLoading(false);
   };
@@ -32,7 +32,7 @@ const ProfilePage = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <Typography variant="h6" gutterBottom>
-            Describe your background and the job you're looking for:
+            Briefly describe your education, experience and skills:
           </Typography>
           <TextField
             id="inputString"
