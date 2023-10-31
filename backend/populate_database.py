@@ -1,6 +1,6 @@
 import os
 import json
-from transformers import AutoModel
+from transformers import AutoTokenizer, AutoModel
 import torch
 from pinecone import init, Index
 from dotenv import load_dotenv
@@ -10,21 +10,27 @@ load_dotenv()
 pinecone_apikey = os.environ['pinecone_apikey']
 pinecone_environment = os.environ['pinecone_environment']
 
-model = AutoModel.from_pretrained('jinaai/jina-embeddings-v2-small-en', trust_remote_code=True)
+# Load model and tokenizer from HuggingFace Hub
+tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-large-en-v1.5')
+model = AutoModel.from_pretrained('BAAI/bge-large-en-v1.5')
+model.eval()
 
 def get_embedding(text):
-    # Convert the text to embeddings using the Jina Embedding model
-    with torch.no_grad():  # Ensure you're not computing gradients
-        embeddings = model.encode([text])
-    # Convert tensor to list for serialization
-    return embeddings[0].tolist()
+    # Tokenize and encode the text using the tokenizer
+    encoded_input = tokenizer(text, padding=True, truncation=True, return_tensors='pt')
+    with torch.no_grad():
+        # Pass the tokenized text through the model
+        output = model(**encoded_input)
+        # Select the last hidden state of the first token (i.e., [CLS]) as the sentence embedding
+        embeddings = output.last_hidden_state[:, 0, :].squeeze().tolist()
+    return embeddings
 
 def load_data():
     # Initialize Pinecone
     init(api_key=pinecone_apikey, environment=pinecone_environment)
     
     # Load job listings from the JSON file
-    with open('norway_construction_data.json', 'r', encoding='utf-8') as file:
+    with open('norway_construction_data_no_duplicates.json', 'r', encoding='utf-8') as file:
         job_listings = json.load(file)["content"]
     
     # Extract summaries
@@ -47,5 +53,5 @@ def load_data():
     print(upsert_response)
 
 # Load the data
-load_data()
-
+if __name__ == '__main__':
+    load_data()
