@@ -10,7 +10,7 @@ url = "https://arbeidsplassen.nav.no/public-feed/api/v1/ads"
 
 headers = {
     "Accept": "application/json",
-    "Authorization": f"Bearer {NAV_PUBLIC_API_KEY}"  # replace this with your actual API key
+    "Authorization": f"Bearer {NAV_PUBLIC_API_KEY}"  # replace this with your API key
 }
 
 max_page_size = 50
@@ -30,7 +30,7 @@ for page_number in range(total_requests):
     }
 
     response = requests.get(url, headers=headers, params=params)
-    data = response.json()  # use requests' built-in JSON decoder
+    data = response.json()
     
     all_data.extend(data["content"])
     
@@ -42,10 +42,9 @@ for page_number in range(total_requests):
 with open('norway_data.json', 'w') as f:
     json.dump(all_data, f)
 
-# Now, you can access fields from the data
 print(len(all_data))
 
-# Let's print the first 3 job listings
+# Print the first 3 jobs
 for job in all_data[:3]:
     print("\nJob Title: ", job['title'])
     print("Employer: ", job['employer']['name'])
