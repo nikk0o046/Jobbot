@@ -67,6 +67,18 @@ Navigate to the frontend directory, install necessary dependencies with npm inst
 - Input your education, experience, and skills. Click "Submit".
 - Interact with job listings as desired
 
+**Fetching new data**
+If you want to fetch new data, get the API key and run:
+python norway_fetch_data.py
+
+Then, I decided to remove listings if their employer name and job title were identical:
+python duplicate_finder.py
+
+After that, create summaries:
+python create_summaries.py
+
+Now you are ready to populate the database with new data and proceed as already told above.
+
 # Contact info
 
 nikk0o046@gmail.com
